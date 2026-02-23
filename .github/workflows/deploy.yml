@@ -21,8 +21,10 @@ jobs:
 
       - name: Build & Push Docker Image
         run: |
-          docker build -t keonjo/myportfolio-api:latest .
-          docker push keonjo/myportfolio-api:latest
+          docker build -t kimyeeun123/mini-portfolio-api:latest .
+          docker push kimyeeun123/mini-portfolio-api:latest
+        # 본인 docker hub 이름으로 작성.
+        # mini-portfolio-api 이름 통일
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1
@@ -31,6 +33,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/myportfolio-api
+            cd ~/mini-portfolio-api
             docker compose pull
-            docker compose up -d --build
+            docker compose up -d
